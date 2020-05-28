@@ -1,10 +1,10 @@
 const {
-    rollDice
+    dice
 } = require('./commands');
 
 function commandParser(client, command, target) {
   if (command === '!dice') {
-    const num = rollDice();
+    const num = dice();
 
     client.say(target, `You rolled a ${num}`);
 

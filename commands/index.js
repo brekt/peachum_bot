@@ -1,5 +1,5 @@
-const rollDice = require('./roll-dice');
+const dice = require('./dice');
 
 module.exports = {
-    rollDice
+    dice
 };

@@ -1,24 +1,8 @@
 const tmi = require('tmi.js');
 const commandParser = require('./command-parser');
-require('dotenv').config();
+const constants = require('./constants');
 
-
-const BOT_USERNAME = 'peachum_bot';
-const OAUTH_TOKEN = process.env.OAUTH_TOKEN;
-const CHANNEL_NAME = 'brekt';
-
-// Define configuration options
-const opts = {
-  identity: {
-    username: BOT_USERNAME,
-    password: OAUTH_TOKEN
-  },
-  channels: [
-    CHANNEL_NAME
-  ]
-};
-
-const client = new tmi.client(opts);
+const client = new tmi.client(constants.TMIJS_OPTIONS);
 
 client.on('message', onMessageHandler);
 client.on('connected', onConnectedHandler);
