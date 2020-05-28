@@ -1,0 +1,31 @@
+{
+  "name": "peachum_bot",
+  "version": "0.0.1",
+  "description": "A Twitch Bot for https://twitch.tv/brekt",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "tmi.js": "^1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/brekt/peachum_bot.git"
+  },
+  "keywords": [
+    "twitch",
+    "bot",
+    "chatbot",
+    "chat",
+    "node"
+  ],
+  "author": "brekt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brekt/peachum_bot/issues"
+  },
+  "homepage": "https://github.com/brekt/peachum_bot#readme"
+}
