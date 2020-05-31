@@ -6,7 +6,6 @@ const OAUTH_TOKEN = process.env.OAUTH_TOKEN;
 const SPOTIFY_CLIENT_ID = '88e5b0cbce064ac28f5a7d3ccf0f47c1';
 const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 
-
 const TMIJS_OPTIONS = {
   identity: {
     username: BOT_USERNAME,
