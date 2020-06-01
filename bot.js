@@ -15,7 +15,7 @@ const {
 const app = express();
 
 app.get('/', (req, res) => {
-    const scopes = encodeURIComponent('user-read-email user-read-currently-playing');
+    const scopes = encodeURIComponent('user-read-email user-read-playback-state');
     const redirectUri = encodeURIComponent(SPOTIFY_REDIRECT_URL);
     const authUrl = 'https://accounts.spotify.com/authorize';
 

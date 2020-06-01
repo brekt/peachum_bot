@@ -5,6 +5,8 @@ async function song() {
     try {
         const songData = await getSongData();
 
+        console.log('songData:', songData);
+
         return songData;
     } catch (err) {
         console.error('Error getting song data:', err);
@@ -12,12 +14,15 @@ async function song() {
 }
 
 async function getSongData() {
-    // return promisify(spotify.getMyCurrentPlaybackState.bind(spotify))({ market: 'US' });
-    return spotify.getMyCurrentPlaybackState({ market: 'US' }, (err, data) => {
-        if (err) { return err; }
+    try {
+        const data = await spotify.getMyCurrentPlaybackState({ market: 'US' });
 
-        return data;
-    });
+        console.log(data);
+    
+        return data.body;
+    } catch (err) {
+        console.error('Error getting song data:', err);
+    }
 }
 
 module.exports = song;
