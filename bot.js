@@ -1,19 +1,34 @@
 const express = require('express');
 const tmi = require('tmi.js');
+const { authorize  } = require('./lib/spotify');
 const commandParser = require('./command-parser');
 const {
-  TMIJS_OPTIONS
+    EXPRESS_PORT,
+    SPOTIFY_CLIENT_ID,
+    SPOTIFY_REDIRECT_URL,
+    TMIJS_OPTIONS
 } = require('./constants');
 
 /**
- * Express Web Server
+ * Express Web Server For Spotify Authentication
  */
 const app = express();
-const port = 3000;
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => {
+    const scopes = encodeURIComponent('user-read-email user-read-currently-playing');
+    const redirectUri = encodeURIComponent(SPOTIFY_REDIRECT_URL);
+    const authUrl = 'https://accounts.spotify.com/authorize';
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+    res.redirect(`${authUrl}?response_type=code&client_id=${SPOTIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${redirectUri}`);
+});
+
+app.get('/success', async (req, res) => {
+    await authorize(req.query.code);
+
+    res.send('<h1>Successful Authentication</h1>');
+});
+
+app.listen(EXPRESS_PORT, () => console.log(`Express server listening at http://localhost:${EXPRESS_PORT}`))
 
 /**
  * Twitch Bot Connection
@@ -26,18 +41,18 @@ client.on('connected', onConnectedHandler);
 client.connect();
 
 function onMessageHandler (target, context, msg, self) {
-  if (self) { return; } // Ignore messages from the bot
+    if (self) { return; } // Ignore messages from the bot
 
-  const commands = ['!dice', '!song'];
+    const commands = ['!dice', '!song'];
 
-  if (!commands.includes(msg.split(' ')[0])) { return; }
+    if (!commands.includes(msg.split(' ')[0])) { return; }
 
-  const command = msg.trim();
+    const command = msg.trim();
 
-  return commandParser(client, command, target);
+    return commandParser(client, command, target);
 }
 
 // Called every time the bot connects to Twitch chat
 function onConnectedHandler (addr, port) {
-  console.log(`* Connected to ${addr}:${port}`);
+    console.log(`* Connected to ${addr}:${port}`);
 }

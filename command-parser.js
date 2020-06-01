@@ -3,19 +3,21 @@ const {
     song
 } = require('./commands');
 
-function commandParser(client, command, target) {
-  switch (command) {
+async function commandParser(client, command, target) {
+switch (command) {
     case '!dice':
-      const num = dice();
-      client.say(target, `You rolled a ${num}`);
-      console.log(`* Executed ${command} command`);
-      break;
+        const num = dice();
+
+        return client.say(target, `You rolled a ${num}`);
     case '!song':
-      const songData = song();
-      break;
+        const songData = await song();
+
+        return client.say(target, `Currently playing song: ${JSON.stringify(songData)}`);
     default:
-      console.log(`* Unknown command ${command}`);
-  }
+        console.log(`* Unknown command ${command}`);
+        
+        return client.say(target, 'Wut?');
+    }
 }
 
 module.exports = commandParser;

@@ -12,7 +12,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "npm test"
+    "start": "node bot.js",
+    "test": "npm test",
+    "watch": "nodemon bot.js"
   },
   "repository": {
     "type": "git",
