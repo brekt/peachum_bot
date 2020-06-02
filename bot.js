@@ -3,6 +3,7 @@ const tmi = require('tmi.js');
 const { authorize  } = require('./lib/spotify');
 const commandParser = require('./command-parser');
 const {
+    COMMAND_LIST,
     EXPRESS_PORT,
     SPOTIFY_CLIENT_ID,
     SPOTIFY_REDIRECT_URL,
@@ -43,9 +44,7 @@ client.connect();
 function onMessageHandler (target, context, msg, self) {
     if (self) { return; } // Ignore messages from the bot
 
-    const commands = ['!dice', '!song'];
-
-    if (!commands.includes(msg.split(' ')[0])) { return; }
+    if (!COMMAND_LIST.includes(msg.split(' ')[0])) { return; }
 
     const command = msg.trim();
 

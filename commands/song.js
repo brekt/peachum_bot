@@ -15,7 +15,7 @@ async function song() {
 async function getSongData() {
     try {
         const data = await spotify.getMyCurrentPlaybackState({ market: 'US' });
-    
+
         return data.body;
     } catch (err) {
         console.error('Error getting song data:', err);
@@ -28,9 +28,10 @@ function buildResponse(songData = {}) {
     const songName = songData?.item?.name || '';
     const trackLength = songData?.item?.duration_ms || '';
     const albumName = songData?.item?.album?.name || '';
-    const releaseDate = songData?.item?.album?.release_date || ''; // get year regardless of format
+    const releaseDate = songData?.item?.album?.release_date || '';
+    const precision = songData?.item?.album?.release_date_precision || '';
 
-    return `The currently playing song is "${songName}" by ${artistName} from the album ${albumName}. It was released in ${formatReleaseDate(releaseDate)}. The track length is ${formatTrackLength(trackLength)}.`;
+    return `The currently playing song is "${songName}" by ${artistName} from the album ${albumName}. It was released in ${formatReleaseDate(releaseDate, precision)}. The track length is ${formatTrackLength(trackLength)}.`;
 }
 
 function formatTrackLength(ms = 0) {

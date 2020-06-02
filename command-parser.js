@@ -2,6 +2,7 @@ const {
     dice,
     song
 } = require('./commands');
+const { PEACHUM_URL } = require('./constants');
 
 async function commandParser(client, command, target) {
 switch (command) {
@@ -9,6 +10,9 @@ switch (command) {
         const num = dice();
 
         return client.say(target, `You rolled a ${num}`);
+    case '!repo':
+
+        return client.say(target, `I\'m open source: ${PEACHUM_URL}`);
     case '!song':
         const songInfo = await song();
 
