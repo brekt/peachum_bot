@@ -1,3 +1,4 @@
+const { promisify } = require('util');
 const _get = require('lodash/get');
 const { spotify } = require('../lib/spotify');
 
@@ -14,7 +15,7 @@ async function song() {
 
 async function getSongData() {
     try {
-        const data = await spotify.getMyCurrentPlaybackState({ market: 'US' });
+        const data = await promisify(spotify.getMyCurrentPlaybackState.bind(spotify))({ market: 'US' });
 
         return data.body;
     } catch (err) {
