@@ -10,9 +10,9 @@ switch (command) {
 
         return client.say(target, `You rolled a ${num}`);
     case '!song':
-        const songData = await song();
+        const songInfo = await song();
 
-        return client.say(target, `Currently playing song: ${JSON.stringify(songData)}`);
+        return client.say(target, songInfo);
     default:
         console.log(`* Unknown command ${command}`);
         
