@@ -8,12 +8,12 @@ const COMMAND_LIST = [
 
 const BOT_USERNAME = 'peachum_bot';
 const CHANNEL_NAME = 'brekt';
-const EXPRESS_PORT = 3000;
+const EXPRESS_PORT = 4444;
 const OAUTH_TOKEN = process.env.OAUTH_TOKEN;
 const PEACHUM_URL = 'https://github.com/brekt/peachum_bot';
-const SPOTIFY_CLIENT_ID = '88e5b0cbce064ac28f5a7d3ccf0f47c1';
+const SPOTIFY_CLIENT_ID = '913cb7d8253e4eda9bd78b94e80b78c6';
 const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
-const SPOTIFY_REDIRECT_URL = 'http://localhost:3000/success';
+const SPOTIFY_REDIRECT_URI = 'http://localhost:4444/success';
 
 
 const TMIJS_OPTIONS = {
@@ -35,6 +35,6 @@ module.exports = {
     PEACHUM_URL,
     SPOTIFY_CLIENT_ID,
     SPOTIFY_CLIENT_SECRET,
-    SPOTIFY_REDIRECT_URL,
+    SPOTIFY_REDIRECT_URI,
     TMIJS_OPTIONS
 };

@@ -6,7 +6,7 @@ const {
     COMMAND_LIST,
     EXPRESS_PORT,
     SPOTIFY_CLIENT_ID,
-    SPOTIFY_REDIRECT_URL,
+    SPOTIFY_REDIRECT_URI,
     TMIJS_OPTIONS
 } = require('./constants');
 
@@ -17,7 +17,7 @@ const app = express();
 
 app.get('/', (req, res) => {
     const scopes = encodeURIComponent('user-read-email user-read-playback-state');
-    const redirectUri = encodeURIComponent(SPOTIFY_REDIRECT_URL);
+    const redirectUri = encodeURIComponent(SPOTIFY_REDIRECT_URI);
     const authUrl = 'https://accounts.spotify.com/authorize';
 
     res.redirect(`${authUrl}?response_type=code&client_id=${SPOTIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${redirectUri}`);
@@ -29,7 +29,7 @@ app.get('/success', async (req, res) => {
     res.send('<h1>Successful Authentication</h1>');
 });
 
-app.listen(EXPRESS_PORT, () => console.log(`Express server listening at http://localhost:${EXPRESS_PORT}`))
+app.listen(EXPRESS_PORT, () => console.log(`Express server listening at http://localhost:${EXPRESS_PORT}`));
 
 /**
  * Twitch Bot Connection
