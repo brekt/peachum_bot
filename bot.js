@@ -6,7 +6,7 @@ const {
     COMMAND_LIST,
     EXPRESS_PORT,
     SPOTIFY_CLIENT_ID,
-    SPOTIFY_REDIRECT_URL,
+    SPOTIFY_REDIRECT_URI,
     TMIJS_OPTIONS
 } = require('./constants');
 
@@ -17,7 +17,7 @@ const app = express();
 
 app.get('/', (req, res) => {
     const scopes = encodeURIComponent('user-read-email user-read-playback-state');
-    const redirectUri = encodeURIComponent(SPOTIFY_REDIRECT_URL);
+    const redirectUri = encodeURIComponent(SPOTIFY_REDIRECT_URI);
     const authUrl = 'https://accounts.spotify.com/authorize';
 
     res.redirect(`${authUrl}?response_type=code&client_id=${SPOTIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${redirectUri}`);
