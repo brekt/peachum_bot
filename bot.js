@@ -29,7 +29,7 @@ app.get('/success', async (req, res) => {
     res.send('<h1>Successful Authentication</h1>');
 });
 
-app.listen(EXPRESS_PORT, () => console.log(`Express server listening at http://localhost:${EXPRESS_PORT}`))
+app.listen(EXPRESS_PORT, () => console.log(`Express server listening at http://localhost:${EXPRESS_PORT}`));
 
 /**
  * Twitch Bot Connection
