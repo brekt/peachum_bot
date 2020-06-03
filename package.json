@@ -1,39 +1,40 @@
 {
-  "name": "peachum_bot",
-  "version": "0.0.1",
-  "description": "A Twitch Bot for https://twitch.tv/brekt",
-  "main": "index.js",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "lodash": "^4.17.15",
-    "node-fetch": "^2.6.0",
-    "spotify-web-api-node": "^4.0.0",
-    "tmi.js": "^1.5.0"
-  },
-  "devDependencies": {
-    "eslint": "^7.1.0"
-  },
-  "scripts": {
-    "start": "node bot.js",
-    "test": "npm test",
-    "watch": "nodemon bot.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/brekt/peachum_bot.git"
-  },
-  "keywords": [
-    "twitch",
-    "bot",
-    "chatbot",
-    "chat",
-    "node"
-  ],
-  "author": "brekt",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/brekt/peachum_bot/issues"
-  },
-  "homepage": "https://github.com/brekt/peachum_bot#readme"
+    "name": "peachum_bot",
+    "version": "0.0.1",
+    "description": "A Twitch Bot for https://twitch.tv/brekt",
+    "main": "index.js",
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "lodash": "^4.17.15",
+        "node-fetch": "^2.6.0",
+        "spotify-web-api-node": "^4.0.0",
+        "tmi.js": "^1.5.0"
+    },
+    "devDependencies": {
+        "eslint": "^7.1.0",
+        "jest": "^26.0.1"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "test": "jest --coverage --verbose",
+        "watch": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/brekt/peachum_bot.git"
+    },
+    "keywords": [
+        "twitch",
+        "bot",
+        "chatbot",
+        "chat",
+        "node"
+    ],
+    "author": "brekt",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/brekt/peachum_bot/issues"
+    },
+    "homepage": "https://github.com/brekt/peachum_bot#readme"
 }
