@@ -1,5 +1,5 @@
 const dice = require('./dice');
-const song = require('./song');
+const { song } = require('./song');
 
 module.exports = {
     dice,

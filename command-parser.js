@@ -4,7 +4,7 @@ const {
 } = require('./commands');
 const { PEACHUM_URL } = require('./constants');
 
-async function commandParser(client, command, target) {
+async function commandParser(client, command = '', target = '') {
     switch (command) {
         case '!dice': {
             const num = dice();

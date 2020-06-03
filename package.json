@@ -13,12 +13,16 @@
     },
     "devDependencies": {
         "eslint": "^7.1.0",
+        "eslint-plugin-jest": "^23.13.2",
         "jest": "^26.0.1"
     },
     "scripts": {
         "start": "node index.js",
         "test": "jest --coverage --verbose",
         "watch": "nodemon index.js"
+    },
+    "jest": {
+        "testEnvironment": "node"
     },
     "repository": {
         "type": "git",
