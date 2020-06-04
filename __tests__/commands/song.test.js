@@ -1,7 +1,7 @@
 const songFunctions = require('../../commands/song');
 const mockSongData = require('../../__mocks__/mock-song-data.json');
 
-describe('song', () => {
+describe('the song module', () => {
     beforeEach(() => {
         console.error.mockRestore && console.error.mockRestore();
     });
@@ -23,15 +23,14 @@ describe('song', () => {
 
             expect(console.error).toHaveBeenCalled();
         });
-    });
 
-    describe('when getting song data', () => {
-        xit('will call a spotify API method', async () => {
-            songFunctions.getMyCurrentPlaybackState = jest.fn().mockResolvedValue({});
-            await songFunctions.getSongData();
+        describe('when getting song data', () => {
+            xit('will call a spotify API method', async () => {
+                songFunctions.getMyCurrentPlaybackState = jest.fn().mockResolvedValue({});
+                await songFunctions.getSongData();
 
-            expect(songFunctions.getMyCurrentPlaybackState).toHaveBeenCalled();
+                expect(songFunctions.getMyCurrentPlaybackState).toHaveBeenCalled();
+            });
         });
     });
-
 });
