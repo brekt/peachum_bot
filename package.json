@@ -18,11 +18,8 @@
     },
     "scripts": {
         "start": "node index.js",
-        "test": "jest --coverage --verbose",
+        "test": "jest --verbose",
         "watch": "nodemon index.js"
-    },
-    "jest": {
-        "testEnvironment": "node"
     },
     "repository": {
         "type": "git",

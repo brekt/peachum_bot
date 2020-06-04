@@ -2,6 +2,14 @@ const { promisify } = require('util');
 const _get = require('lodash/get');
 const { spotify } = require('../lib/spotify');
 
+/**
+ * Placing this here so it can be exported and tested.
+ * The promisification makes it work consistently, and
+ * the binding is necessary because it uses the `this`
+ * keyword. Test currently failing and skipped though. :(
+ */
+const getMyCurrentPlayBackState = promisify(spotify.getMyCurrentPlaybackState.bind(spotify));
+
 const songFunctions = {
     song: async () => {
         try {
@@ -13,9 +21,12 @@ const songFunctions = {
             console.error('Error getting song data:', err);
         }
     },
+
+    getMyCurrentPlayBackState, // created up above
+
     getSongData: async () => {
         try {
-            const data = await promisify(spotify.getMyCurrentPlaybackState.bind(spotify))({ market: 'US' });
+            const data = await songFunctions.getMyCurrentPlayBackState({ market: 'US' });
     
             return data.body;
         } catch (err) {
@@ -24,6 +35,7 @@ const songFunctions = {
             throw err;
         }
     },
+
     buildResponse: (songData = {}) => {
         const artistName = _get(songData, 'item.artists[0].name', '');
         const songName = _get(songData, 'item.name', '');
@@ -34,6 +46,7 @@ const songFunctions = {
     
         return `The currently playing song is "${songName}" by ${artistName} from the album ${albumName}. It was released in ${songFunctions.formatReleaseDate(releaseDate, precision)}. The track length is ${songFunctions.formatTrackLength(trackLength)}.`;
     },
+
     formatTrackLength: (ms = 0) => {
         const seconds = ms / 1000;
         const minutes = Math.floor(seconds / 60);
@@ -41,6 +54,7 @@ const songFunctions = {
     
         return `${minutes}:${leftOverseconds}`;
     },
+
     formatReleaseDate: (date = '', precision = '') => {
         switch (precision) {
             case 'year':
