@@ -13,11 +13,13 @@
     },
     "devDependencies": {
         "eslint": "^7.1.0",
-        "jest": "^26.0.1"
+        "eslint-plugin-jest": "^23.13.2",
+        "jest": "^26.0.1",
+        "prettier": "2.0.5"
     },
     "scripts": {
         "start": "node index.js",
-        "test": "jest --coverage --verbose",
+        "test": "jest --verbose",
         "watch": "nodemon index.js"
     },
     "repository": {
