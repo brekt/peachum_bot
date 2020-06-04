@@ -8,25 +8,34 @@ const { spotify } = require('../lib/spotify');
  * the binding is necessary because it uses the `this`
  * keyword. Test currently failing and skipped though. :(
  */
-const getMyCurrentPlayBackState = promisify(spotify.getMyCurrentPlaybackState.bind(spotify));
+const getMyCurrentPlaybackState = promisify(spotify.getMyCurrentPlaybackState.bind(spotify));
 
 const songFunctions = {
+
+    lastTimeRun: Date.now(),
+
     song: async () => {
+        if (Date.now() - this.lastTimeRun <  10000) { return; }
+
         try {
             const songData = await songFunctions.getSongData();
             const chatResponse = songFunctions.buildResponse(songData);
     
+            this.lastTimeRun = Date.now();
+
             return chatResponse;
         } catch (err) {
+            this.lastTimeRun = Date.now();
+
             console.error('Error getting song data:', err);
         }
     },
 
-    getMyCurrentPlayBackState, // created up above
+    getMyCurrentPlaybackState, // created up above
 
     getSongData: async () => {
         try {
-            const data = await songFunctions.getMyCurrentPlayBackState({ market: 'US' });
+            const data = await songFunctions.getMyCurrentPlaybackState({ market: 'US' });
     
             return data.body;
         } catch (err) {

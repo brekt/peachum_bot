@@ -18,7 +18,11 @@ async function commandParser(client, command = '', target = '') {
         case '!song': {
             const songInfo = await song();
 
-            return client.say(target, songInfo);
+            if (songInfo) {
+                return client.say(target, songInfo);
+            }
+
+            return;
         }
         default:
             console.log(`* Unknown command ${command}`);
