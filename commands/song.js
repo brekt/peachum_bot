@@ -8,19 +8,22 @@ const { spotify } = require('../lib/spotify');
  * the binding is necessary because it uses the `this`
  * keyword. Test currently failing and skipped though. :(
  */
-const getMyCurrentPlaybackState = promisify(spotify.getMyCurrentPlaybackState.bind(spotify));
+const getMyCurrentPlaybackState = promisify(
+    spotify.getMyCurrentPlaybackState.bind(spotify)
+);
 
 const songFunctions = {
-
     lastTimeRun: Date.now(),
 
-    song: async () => {
-        if (Date.now() - this.lastTimeRun <  10000) { return; }
+    song: async (throttle = true) => {
+        if (throttle && Date.now() - this.lastTimeRun < 10000) {
+            return;
+        }
 
         try {
             const songData = await songFunctions.getSongData();
             const chatResponse = songFunctions.buildResponse(songData);
-    
+
             this.lastTimeRun = Date.now();
 
             return chatResponse;
@@ -35,12 +38,15 @@ const songFunctions = {
 
     getSongData: async () => {
         try {
-            const data = await songFunctions.getMyCurrentPlaybackState({ market: 'US' });
-    
+            const data = await songFunctions.getMyCurrentPlaybackState({
+                market: 'US',
+            });
+
+            console.log(data);
             return data.body;
         } catch (err) {
             console.error('Error getting song data:', err);
-    
+
             throw err;
         }
     },
@@ -51,16 +57,25 @@ const songFunctions = {
         const trackLength = _get(songData, 'item.duration_ms');
         const albumName = _get(songData, 'item.album.name', '');
         const releaseDate = _get(songData, 'item.album.release_date', '');
-        const precision = _get(songData, 'item.album.release_date_precision', '');
-    
-        return `The currently playing song is "${songName}" by ${artistName} from the album ${albumName}. It was released in ${songFunctions.formatReleaseDate(releaseDate, precision)}. The track length is ${songFunctions.formatTrackLength(trackLength)}.`;
+        const precision = _get(
+            songData,
+            'item.album.release_date_precision',
+            ''
+        );
+
+        return `The currently playing song is "${songName}" by ${artistName} from the album ${albumName}. It was released in ${songFunctions.formatReleaseDate(
+            releaseDate,
+            precision
+        )}. The track length is ${songFunctions.formatTrackLength(
+            trackLength
+        )}.`;
     },
 
     formatTrackLength: (ms = 0) => {
         const seconds = ms / 1000;
         const minutes = Math.floor(seconds / 60);
-        const leftOverseconds = Math.round(seconds - (minutes * 60));
-    
+        const leftOverseconds = Math.round(seconds - minutes * 60);
+
         return `${minutes}:${leftOverseconds}`;
     },
 
@@ -73,7 +88,7 @@ const songFunctions = {
             default:
                 return '';
         }
-    }
+    },
 };
 
 module.exports = songFunctions;

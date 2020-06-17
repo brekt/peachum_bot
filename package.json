@@ -38,5 +38,8 @@
     "bugs": {
         "url": "https://github.com/brekt/peachum_bot/issues"
     },
-    "homepage": "https://github.com/brekt/peachum_bot#readme"
+    "homepage": "https://github.com/brekt/peachum_bot#readme",
+    "jest": {
+        "testEnvironment": "node"
+    }
 }

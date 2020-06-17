@@ -3,17 +3,30 @@ const mockSongData = require('../../__mocks__/mock-song-data.json');
 
 describe('the song module', () => {
     beforeEach(() => {
-        console.error.mockRestore && console.error.mockRestore();
+        jest.resetAllMocks();
     });
 
     describe('when getting chat response message', () => {
         it('will return a chatResponse string', async () => {
-            songFunctions.getSongData = jest.fn().mockResolvedValue(mockSongData);
+            songFunctions.getSongData = jest
+                .fn()
+                .mockResolvedValue(mockSongData);
             const chatResponse = await songFunctions.song();
 
-            expect(chatResponse).toBe('The currently playing song is "Children of the Moon" by The Alan Parsons Project from the album Eye In The Sky (Expanded Edition). It was released in 1982. The track length is 4:51.');
+            expect(chatResponse).toBe(
+                'The currently playing song is "Children of the Moon" by The Alan Parsons Project from the album Eye In The Sky (Expanded Edition). It was released in 1982. The track length is 4:51.'
+            );
         });
-    
+
+        it('will console.error if an error occurs when getting a song', async () => {
+            console.error = jest.fn();
+            songFunctions.getSongData = jest.fn().mockRejectedValue({});
+
+            await songFunctions.song(false);
+
+            expect(console.error).toHaveBeenCalled();
+        });
+
         xit('will log an error if an exception occurs', async () => {
             songFunctions.getSongData = jest.fn().mockRejectedValue({});
             console.error = jest.fn();
@@ -26,10 +39,14 @@ describe('the song module', () => {
 
         describe('when getting song data', () => {
             xit('will call a spotify API method', async () => {
-                songFunctions.getMyCurrentPlaybackState = jest.fn().mockResolvedValue({});
+                songFunctions.getMyCurrentPlaybackState = jest
+                    .fn()
+                    .mockResolvedValue({});
                 await songFunctions.getSongData();
 
-                expect(songFunctions.getMyCurrentPlaybackState).toHaveBeenCalled();
+                expect(
+                    songFunctions.getMyCurrentPlaybackState
+                ).toHaveBeenCalled();
             });
         });
     });
