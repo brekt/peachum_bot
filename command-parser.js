@@ -1,4 +1,4 @@
-const { dice, song } = require('./commands');
+const { dice, discord, song } = require('./commands');
 const { PEACHUM_URL } = require('./constants');
 
 async function commandParser(client, command = '', target = '') {
@@ -7,6 +7,11 @@ async function commandParser(client, command = '', target = '') {
             const num = dice();
 
             return client.say(target, `You rolled a ${num}`);
+        }
+        case '!discord': {
+            const discordId = discord();
+
+            return client.say(target, `brekt's discord id is ${discordId}`);
         }
         case '!repo': {
             return client.say(target, `I'm open source: ${PEACHUM_URL}`);
