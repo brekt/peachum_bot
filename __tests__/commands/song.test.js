@@ -49,5 +49,43 @@ describe('the song module', () => {
                 ).toHaveBeenCalled();
             });
         });
+
+        describe('when formatting a release date', () => {
+            /*
+                formatReleaseDate: (date = '', precision = '') => {
+                    switch (precision) {
+                        case 'year':
+                            return date;
+                        case 'day':
+                            return date.slice(0, 4);
+                        default:
+                            return '';
+                    }
+                },
+            */
+            it('will just return the date passed of the precision is year', () => {
+                const date = '1999';
+                const precision = 'year';
+
+                const formattedDate = songFunctions.formatReleaseDate(
+                    date,
+                    precision
+                );
+
+                expect(formattedDate).toBe(date);
+            });
+
+            it('will return the first 4 digits of a date of the format is day', () => {
+                const date = '1999-nonsense-string';
+                const precision = 'day';
+
+                const formattedDate = songFunctions.formatReleaseDate(
+                    date,
+                    precision
+                );
+
+                expect(formattedDate).toBe('1999');
+            });
+        });
     });
 });

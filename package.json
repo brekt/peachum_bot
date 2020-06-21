@@ -18,6 +18,7 @@
         "prettier": "2.0.5"
     },
     "scripts": {
+        "cov": "jest --coverage",
         "start": "node index.js",
         "test": "jest --verbose",
         "watch": "nodemon index.js"

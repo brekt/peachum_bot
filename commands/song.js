@@ -73,10 +73,17 @@ const songFunctions = {
 
     formatTrackLength: (ms = 0) => {
         const seconds = ms / 1000;
-        const minutes = Math.floor(seconds / 60);
-        const leftOverseconds = Math.round(seconds - minutes * 60);
+        let minutes = Math.floor(seconds / 60);
+        let leftOverSeconds = Math.round(seconds - minutes * 60);
 
-        return `${minutes}:${leftOverseconds}`;
+        if (leftOverSeconds === 60) {
+            minutes++;
+            leftOverSeconds = 0;
+        }
+
+        const padZero = leftOverSeconds.toString().length === 1 ? '0' : '';
+
+        return `${minutes}:${padZero}${leftOverSeconds}`;
     },
 
     formatReleaseDate: (date = '', precision = '') => {

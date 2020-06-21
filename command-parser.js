@@ -1,7 +1,4 @@
-const {
-    dice,
-    song
-} = require('./commands');
+const { dice, song } = require('./commands');
 const { PEACHUM_URL } = require('./constants');
 
 async function commandParser(client, command = '', target = '') {
@@ -12,7 +9,6 @@ async function commandParser(client, command = '', target = '') {
             return client.say(target, `You rolled a ${num}`);
         }
         case '!repo': {
-
             return client.say(target, `I'm open source: ${PEACHUM_URL}`);
         }
         case '!song': {
@@ -25,8 +21,8 @@ async function commandParser(client, command = '', target = '') {
             return;
         }
         default:
-            console.log(`* Unknown command ${command}`);
-            
+            console.log(`Unknown command ${command}`);
+
             return client.say(target, 'Wut?');
     }
 }
